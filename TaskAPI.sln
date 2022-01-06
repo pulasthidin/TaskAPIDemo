@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAPI.Models", "TaskAPI.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAPI.Services", "TaskAPI.Services\TaskAPI.Services.csproj", "{CFFFE40B-272E-42B0-ABC8-6CD3C751DCC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAPI.DataAccess", "TaskAPI.DataAccess\TaskAPI.DataAccess.csproj", "{40E6677A-FE57-4E2E-9485-D3D7CC123E9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CFFFE40B-272E-42B0-ABC8-6CD3C751DCC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFFFE40B-272E-42B0-ABC8-6CD3C751DCC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFFFE40B-272E-42B0-ABC8-6CD3C751DCC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E6677A-FE57-4E2E-9485-D3D7CC123E9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E6677A-FE57-4E2E-9485-D3D7CC123E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E6677A-FE57-4E2E-9485-D3D7CC123E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E6677A-FE57-4E2E-9485-D3D7CC123E9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

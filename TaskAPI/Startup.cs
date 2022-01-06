@@ -34,9 +34,13 @@ namespace TaskAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskAPI", Version = "v1" });
             });
 
-           // services.AddSingleton(); // Only one instance for application
-            services.AddScoped<ITodoRepository, TodoService>(); // New object is created per request
+            // services.AddSingleton(); // Only one instance for application
             //services.AddTransient(); // Always a new objected is presented
+
+            //services.AddScoped<ITodoRepository, TodoService>(); // New object is created per request
+
+            services.AddScoped<ITodoRepository, TodoSqlServerService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
