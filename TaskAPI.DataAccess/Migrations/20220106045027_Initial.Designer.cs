@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskAPI.DataAccess;
 
 namespace TaskAPI.DataAccess.Migrations
 {
     [DbContext(typeof(TodoDBContext))]
-    partial class TodoDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220106045027_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,9 +94,9 @@ namespace TaskAPI.DataAccess.Migrations
                         {
                             Id = 1,
                             AuthorId = 1,
-                            Created = new DateTime(2022, 1, 6, 10, 21, 19, 334, DateTimeKind.Local).AddTicks(6933),
+                            Created = new DateTime(2022, 1, 6, 10, 20, 26, 891, DateTimeKind.Local).AddTicks(9321),
                             Description = "Get some text books for school",
-                            Due = new DateTime(2022, 1, 11, 10, 21, 19, 337, DateTimeKind.Local).AddTicks(1512),
+                            Due = new DateTime(2022, 1, 11, 10, 20, 26, 894, DateTimeKind.Local).AddTicks(8403),
                             Status = 0,
                             Title = "Get books for school - DB"
                         },
@@ -102,9 +104,9 @@ namespace TaskAPI.DataAccess.Migrations
                         {
                             Id = 2,
                             AuthorId = 2,
-                            Created = new DateTime(2022, 1, 6, 10, 21, 19, 337, DateTimeKind.Local).AddTicks(2163),
+                            Created = new DateTime(2022, 1, 6, 10, 20, 26, 894, DateTimeKind.Local).AddTicks(8997),
                             Description = "Get vegitables for the week",
-                            Due = new DateTime(2022, 1, 8, 10, 21, 19, 337, DateTimeKind.Local).AddTicks(2166),
+                            Due = new DateTime(2022, 1, 8, 10, 20, 26, 894, DateTimeKind.Local).AddTicks(9000),
                             Status = 0,
                             Title = "Get vegitables - DB"
                         },
@@ -112,9 +114,9 @@ namespace TaskAPI.DataAccess.Migrations
                         {
                             Id = 3,
                             AuthorId = 1,
-                            Created = new DateTime(2022, 1, 6, 10, 21, 19, 337, DateTimeKind.Local).AddTicks(2170),
+                            Created = new DateTime(2022, 1, 6, 10, 20, 26, 894, DateTimeKind.Local).AddTicks(9004),
                             Description = "Water all the plants quickly",
-                            Due = new DateTime(2022, 1, 9, 10, 21, 19, 337, DateTimeKind.Local).AddTicks(2171),
+                            Due = new DateTime(2022, 1, 9, 10, 20, 26, 894, DateTimeKind.Local).AddTicks(9004),
                             Status = 0,
                             Title = "Water the plans - DB"
                         });

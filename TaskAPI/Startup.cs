@@ -11,7 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TaskAPI.Services;
+using TaskAPI.Services.Todos;
+using TaskAPI.Services.Authors;
 
 namespace TaskAPI
 {
@@ -28,18 +29,23 @@ namespace TaskAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.ReturnHttpNotAcceptable = true;
+            }).AddXmlDataContractSerializerFormatters(); //xml also support now
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskAPI", Version = "v1" });
             });
 
             // services.AddSingleton(); // Only one instance for application
+            //services.AddScoped(); // New object is created per request
             //services.AddTransient(); // Always a new objected is presented
 
-            //services.AddScoped<ITodoRepository, TodoService>(); // New object is created per request
-
-            services.AddScoped<ITodoRepository, TodoSqlServerService>();
+            //services.AddScoped<ITodoRepository, TodoService>(); // Hard Code values concrete class
+            services.AddScoped<ITodoRepository, TodoSqlServerService>(); // data from data base
+            services.AddScoped<IAuthorRepository, AuthorSqlServerService>();
 
         }
 

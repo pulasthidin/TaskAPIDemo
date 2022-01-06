@@ -11,6 +11,7 @@ namespace TaskAPI.DataAccess
     public class TodoDBContext : DbContext
     {
         public DbSet<Todo> Todos { get; set; }
+        public DbSet<Author> Authors { get; set; }
         //add all models like todos
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -20,14 +21,45 @@ namespace TaskAPI.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Todo>().HasData(new Todo
+            modelBuilder.Entity<Author>().HasData(new Author[]
             {
-                Id = 1,
+                new Author {Id = 1, FullName = "Pulasthi Dinusha" }, 
+                new Author {Id = 2, FullName ="Ruvini Suranika" },
+                new Author {Id = 3, FullName = "Rex" },
+                new Author {Id = 4, FullName ="Kitty" }
+
+            });
+
+            modelBuilder.Entity<Todo>().HasData(new Todo[]
+            {
+               new Todo
+               { Id = 1,
                 Title = "Get books for school - DB",
                 Description = "Get some text books for school",
                 Created = DateTime.Now,
                 Due = DateTime.Now.AddDays(5),
-                Status = TodoStatus.New
+                Status = TodoStatus.New,
+                AuthorId =  1
+               },
+               new Todo
+               { Id = 2,
+                Title = "Get vegitables - DB",
+                Description = "Get vegitables for the week",
+                Created = DateTime.Now,
+                Due = DateTime.Now.AddDays(2),
+                Status = TodoStatus.New,
+                AuthorId = 2
+               },
+               new Todo
+               { Id = 3,
+                Title = "Water the plans - DB",
+                Description = "Water all the plants quickly",
+                Created = DateTime.Now,
+                Due = DateTime.Now.AddDays(3),
+                Status = TodoStatus.New,
+                AuthorId = 1
+               }
+
             });
         }
     }
