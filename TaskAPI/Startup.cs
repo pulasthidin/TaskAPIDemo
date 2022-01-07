@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TaskAPI.Services.Todos;
 using TaskAPI.Services.Authors;
+using Microsoft.AspNetCore.Http;
 
 namespace TaskAPI
 {
@@ -39,6 +40,8 @@ namespace TaskAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskAPI", Version = "v1" });
             });
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // Automapper injection
+
             // services.AddSingleton(); // Only one instance for application
             //services.AddScoped(); // New object is created per request
             //services.AddTransient(); // Always a new objected is presented
@@ -57,6 +60,17 @@ namespace TaskAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TaskAPI v1"));
+            }
+            else
+            {
+                app.UseExceptionHandler(app =>
+                {
+                    app.Run(async context => 
+                    {
+                        context.Response.StatusCode = 500;
+                        await context.Response.WriteAsync("Prodction Error handling in startup.cs");
+                    });
+                });
             }
 
             app.UseHttpsRedirection();

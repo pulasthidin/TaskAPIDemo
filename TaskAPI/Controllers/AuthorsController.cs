@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper; //auto mapper
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,28 +15,23 @@ namespace TaskAPI.Controllers
     public class AuthorsController : ControllerBase
     {
         private readonly IAuthorRepository _authorRepository;
-        public AuthorsController(IAuthorRepository service)
+        private readonly IMapper _mapper;
+        public AuthorsController(IAuthorRepository service, IMapper mapper)
         {
             _authorRepository = service;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public ActionResult<ICollection<AuthorDto>> GetAuthor()
         {
+            //throw new Exception("Test error"); //for testing production server error
+
             var authors = _authorRepository.GetAllAuthors();
-            var authorsDto = new List<AuthorDto>();
+           
+            var mappedAuthors =_mapper.Map<ICollection<AuthorDto>>(authors); // because of list we put Icollection using Mapping
 
-            foreach (var author in authors)
-            {
-                authorsDto.Add(new AuthorDto
-                {
-                    Id = author.Id,
-                    FullName = author.FullName,
-                    Address = $"{author.AddressNo}, {author.Street}, {author.City}"
-                });
-            }
-
-            return Ok(authorsDto);
+            return Ok(mappedAuthors);
         }
 
         [HttpGet("{id}")]
@@ -48,7 +44,9 @@ namespace TaskAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(author);
+            var mappedAuthor = _mapper.Map<AuthorDto>(author); // mapping single author
+
+            return Ok(mappedAuthor);
         }
     }
 }
