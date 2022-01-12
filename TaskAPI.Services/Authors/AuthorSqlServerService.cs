@@ -21,5 +21,33 @@ namespace TaskAPI.Services.Authors
         {
             return _context.Authors.Find(id);
         }
+
+        public List<Author> GetAllAuthors(string job, string search) 
+        {
+            if(string.IsNullOrEmpty(job) && string.IsNullOrEmpty(search))
+            {
+                return GetAllAuthors();
+            }
+
+            var authorCollection = _context.Authors as IQueryable<Author>; //for SQl Queary
+
+            if (!string.IsNullOrEmpty(job))
+            {
+                job = job.Trim(); // remove spaces end and start side
+                authorCollection = authorCollection.Where(a => a.JobRole == job);
+            }
+
+            if(!string.IsNullOrEmpty(search))
+            {
+                search = search.Trim();
+                authorCollection = authorCollection.Where(a => 
+                a.FullName.Contains(search) || a.City.Contains(search)
+                );
+            }
+
+            return authorCollection.ToList();
+
+            //1 filter 2 search otherwise performance hit comming 
+        }
     }
 }

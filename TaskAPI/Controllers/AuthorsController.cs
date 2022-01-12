@@ -22,12 +22,13 @@ namespace TaskAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public ActionResult<ICollection<AuthorDto>> GetAuthor()
+        [HttpGet] //https://localhost:44356/api/authors/?job=Developer //https://localhost:44356/api/authors?job=Developer&search=s
+        public ActionResult<ICollection<AuthorDto>> GetAuthor(string job, string search)  // https://domain//api/authors/?job=Developer (string job) or ([FromQuery] string job) we used this for getting value from query string
         {
+
             //throw new Exception("Test error"); //for testing production server error
 
-            var authors = _authorRepository.GetAllAuthors();
+            var authors = _authorRepository.GetAllAuthors(job, search);
            
             var mappedAuthors =_mapper.Map<ICollection<AuthorDto>>(authors); // because of list we put Icollection using Mapping
 
