@@ -49,5 +49,13 @@ namespace TaskAPI.Services.Authors
 
             //1 filter 2 search otherwise performance hit comming 
         }
+
+        public Author AddAuthor(Author author)
+        {
+            _context.Authors.Add(author);
+            _context.SaveChanges();
+
+            return _context.Authors.Find(author.Id);
+        }
     }
 }

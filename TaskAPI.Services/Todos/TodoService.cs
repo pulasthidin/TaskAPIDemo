@@ -8,6 +8,11 @@ namespace TaskAPI.Services.Todos
 {
     public class TodoService : ITodoRepository
     {
+        public Todo AddTodo(int authorId, Todo todo)
+        {
+            throw new NotImplementedException();
+        }
+
         //Get Todos hard code values
 
         public List<Todo> AllTodos(int authorId)
@@ -57,5 +62,7 @@ namespace TaskAPI.Services.Todos
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

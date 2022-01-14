@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaskAPI.Models;
 using TaskAPI.Services.Authors;
 using TaskAPI.Services.Models;
 
@@ -14,11 +15,11 @@ namespace TaskAPI.Controllers
     [ApiController]
     public class AuthorsController : ControllerBase
     {
-        private readonly IAuthorRepository _authorRepository;
+        private readonly IAuthorRepository _service;
         private readonly IMapper _mapper;
         public AuthorsController(IAuthorRepository service, IMapper mapper)
         {
-            _authorRepository = service;
+            _service = service;
             _mapper = mapper;
         }
 
@@ -28,17 +29,17 @@ namespace TaskAPI.Controllers
 
             //throw new Exception("Test error"); //for testing production server error
 
-            var authors = _authorRepository.GetAllAuthors(job, search);
+            var authors = _service.GetAllAuthors(job, search);
            
             var mappedAuthors =_mapper.Map<ICollection<AuthorDto>>(authors); // because of list we put Icollection using Mapping
 
             return Ok(mappedAuthors);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetAuthor")]
         public IActionResult GetAuthor(int id)
         {
-            var author = _authorRepository.GetAuthor(id);
+            var author = _service.GetAuthor(id);
 
             if (author is null)
             {
@@ -48,6 +49,17 @@ namespace TaskAPI.Controllers
             var mappedAuthor = _mapper.Map<AuthorDto>(author); // mapping single author
 
             return Ok(mappedAuthor);
+        }
+
+        [HttpPost]
+        public ActionResult<AuthorDto> CreateAuthor(CreateAuthorDto author)
+        {
+            var authorEntity = _mapper.Map<Author>(author);
+            var newAuthor = _service.AddAuthor(authorEntity);
+
+            var authorForReturn = _mapper.Map<AuthorDto>(newAuthor);
+
+            return CreatedAtRoute("GetAuthor", new { id = authorForReturn.Id }, authorForReturn);
         }
     }
 }
