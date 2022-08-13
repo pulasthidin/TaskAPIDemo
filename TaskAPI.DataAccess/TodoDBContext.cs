@@ -15,7 +15,7 @@ namespace TaskAPI.DataAccess
         //add all models like todos
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "Server=CML-PULASTHIRAN\\SQL2019; Database=MyTodoDb; User Id=sa; Password =123";
+            var connectionString = "Server=; Database=MyTodoDb; User Id=; Password =";
             optionsBuilder.UseSqlServer(connectionString);
         }
 
